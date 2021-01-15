@@ -90,19 +90,20 @@ public class DropGameMain extends ApplicationAdapter {
 			Rectangle raindrop = iter.next();
 			raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
 			if(raindrop.y + 64 < 0) iter.remove();
+			if(raindrop.overlaps(bucket)) {
+				dropSound.play();
+				iter.remove();
+			}
 		}
-
-		if(raindrop.overlaps(bucket)) {
-			dropSound.play();
-			iter.remove();
-		}
-
-
 	}
 	
 	@Override
 	public void dispose () {
-
+		dropImage.dispose();
+		bucketImage.dispose();
+		dropSound.dispose();
+		rainMusic.dispose();
+		batch.dispose();
 	}
 
 	private void spawnRaindrop() {
